@@ -1,4 +1,22 @@
 package com.ltnhung.noiseapp.service.impl;
 
-public class TimeDataServiceImpl {
+import com.ltnhung.noiseapp.entity.NoiseData;
+import com.ltnhung.noiseapp.repository.NoiseDataRepository;
+import com.ltnhung.noiseapp.service.NoiseDataService;
+import com.ltnhung.noiseapp.service.TimeDataService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+
+@Service
+@AllArgsConstructor
+public class TimeDataServiceImpl implements TimeDataService {
+    private final NoiseDataRepository noiseDataRepository;
+
+    @Override
+    public NoiseData saveNoiseDataTime(NoiseData noiseData) {
+        noiseData.setTimestamp(LocalDateTime.now().toString());
+        return noiseDataRepository.save(noiseData);
+    }
 }

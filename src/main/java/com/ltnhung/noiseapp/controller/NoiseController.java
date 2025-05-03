@@ -4,6 +4,7 @@ import com.ltnhung.noiseapp.config.FirebaseConfig;
 import com.ltnhung.noiseapp.entity.NoiseData;
 import com.ltnhung.noiseapp.service.FirebaseService;
 import com.ltnhung.noiseapp.service.NoiseDataService;
+import com.ltnhung.noiseapp.service.TimeDataService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,8 @@ public class NoiseController {
 
     private final NoiseDataService noiseDataService;
 
+    private final TimeDataService timeDataService;
+
     @GetMapping("/data")
     public List<NoiseData> getNoiseData() throws InterruptedException {
         return firebaseService.getNoiseData();
@@ -24,7 +27,8 @@ public class NoiseController {
 
     @PostMapping("/add")
     public NoiseData saveNoiseData(@RequestBody NoiseData noiseData) {
-        return noiseDataService.saveNoiseData(noiseData);
+//        return noiseDataService.saveNoiseData(noiseData);
+        return timeDataService.saveNoiseDataTime(noiseData);
     }
 
     @GetMapping("/list")
