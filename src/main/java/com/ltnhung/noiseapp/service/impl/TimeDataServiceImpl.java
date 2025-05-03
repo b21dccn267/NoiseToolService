@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @AllArgsConstructor
@@ -16,7 +17,11 @@ public class TimeDataServiceImpl implements TimeDataService {
 
     @Override
     public NoiseData saveNoiseDataTime(NoiseData noiseData) {
-        noiseData.setTimestamp(LocalDateTime.now().toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String currentTime = LocalDateTime.now().format(formatter);
+
+        noiseData.setTimestamp(currentTime);
+
         return noiseDataRepository.save(noiseData);
     }
 }
